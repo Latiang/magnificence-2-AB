@@ -28,15 +28,7 @@ void Interface::setup()
     registerCommand(std::vector<std::string> {"divide", "dv", "div"}, &CommandEngine::cmdDivide);
     registerCommand(std::vector<std::string> {"unmove", "umv"}, &CommandEngine::cmdUnmove);
 
-    //Machine learning related commands
-    registerCommand(std::vector<std::string> {"train", "tr"}, &CommandEngine::cmdTrain);
-    registerCommand(std::vector<std::string> {"loadmodel", "lm"}, &CommandEngine::cmdLoadModel);
-    registerCommand(std::vector<std::string> {"modelmove", "mm"}, &CommandEngine::cmdModelMove);
-    registerCommand(std::vector<std::string> {"resetmodelcheckpoints", "resetcheckpoints", "rc", "rmc"}, &CommandEngine::cmdResetModelCheckpoints);
-    registerCommand(std::vector<std::string> {"modelmoves", "mms"}, &CommandEngine::cmdModelMoves);
-    registerCommand(std::vector<std::string> {"modeltrainingperft", "trainingperft", "modelperft", "tperft"}, &CommandEngine::cmdModelLearnPerft);
-    registerCommand(std::vector<std::string> {"modeloutput", "mo"}, &CommandEngine::cmdModelDisplayOutput);
-    registerCommand(std::vector<std::string> {"modeleval", "me"}, &CommandEngine::cmdModelBoardValue);
+
 
     //UCI related commands
     registerCommand(std::vector<std::string> {"uci"}, &CommandEngine::cmdUCI);
