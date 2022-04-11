@@ -34,10 +34,10 @@ add_executable(${PROJECT_NAME} ${HEADER_FILES} ${SOURCE_FILES} ${SHADER_FILES})
    
 # Packages
 # PyTorch
-find_package(Torch REQUIRED)
+#find_package(Torch REQUIRED)
 
 #Set variable LIBS to the libraries included
-set(LIBS ${TORCH_LIBRARIES})
+#set(LIBS ${TORCH_LIBRARIES})
 
 #Link with libraries
 target_link_libraries(${PROJECT_NAME} ${LIBS})
