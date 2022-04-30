@@ -14,15 +14,11 @@
 #elif defined(__gnu_linux__) || defined(__linux__) || defined(__CYGWIN__)
 #include "x86intrin.h"
 #endif
-#include <iostream>
-#include <string>
 #include <vector>
-#include <random>
-#include <memory>
+#include <string>
 #include "Move.h"
 #include "type_definitions.h"
 
-#include "../settings.h"
 #if defined(DEBUG)
     #include <cassert>
 #endif
@@ -127,7 +123,7 @@ class BitBoard {
          * 
          * @param index 
          */
-        inline void removePiece(size_t index);
+        void removePiece(size_t index);
 
 
         /**
@@ -135,14 +131,14 @@ class BitBoard {
          * 
          * @param ep_in 
          */
-        inline void setEP(u8 ep_in);
+        void setEP(u8 ep_in);
 
         /**
          * @brief Set the Castling variable and update the zoobrist hash accordingly
          * 
          * @param castling_in 
          */
-        inline void setCastling(u8 castling_in);
+        void setCastling(u8 castling_in);
         
         /**
          * @brief Adds the given piece at index to the board
@@ -150,7 +146,7 @@ class BitBoard {
          * @param index 
          * @param piece 
          */
-        inline void addPiece(size_t index, u8 piece);
+        void addPiece(size_t index, u8 piece);
 
         void initZoobrist();
     public:        

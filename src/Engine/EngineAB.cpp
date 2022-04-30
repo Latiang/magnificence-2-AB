@@ -1,4 +1,7 @@
 #include "EngineAB.h"
+#include <algorithm>
+
+#include "../Interface/BoardConversions.h"
 
 EngineAlphaBeta::EngineAlphaBeta()
 {

@@ -1,5 +1,5 @@
 #include "CommandEngine.h"
-
+#include "BoardConversions.h"
 /// @brief function used as comparison operator to sort a move list alfabatically based on long algebraic form
 bool moveCompAlfabetical(Move& lhs, Move& rhs)
 {

@@ -17,7 +17,6 @@
 #include <unordered_map>
 
 #include "CommandEngine.h"
-#include "StringHelpers.h"
 
 const std::string WELCOME_MESSAGE = 
     "--------------------------------\n"

@@ -8,9 +8,12 @@
  * @copyright Copyright (c) 2020
  * 
  */
-#include "BitBoard.h"
-#if defined(DEBUG)
 #pragma once
+#include "BitBoard.h"
+#include <random>
+
+
+#if defined(DEBUG)
 #include "../Interface/BoardConversions.h"
 #endif
 
@@ -298,7 +301,7 @@ void init() {
  * 
  * @param ep_in 
  */
-inline void BitBoard::setEP(u8 ep_in) {
+void BitBoard::setEP(u8 ep_in) {
     zoobrist = zoobrist ^ zoobrist_keys[64 * 13 + ep] ^ zoobrist_keys[64 * 13 + ep_in];
     ep = ep_in;
 }
@@ -308,7 +311,7 @@ inline void BitBoard::setEP(u8 ep_in) {
  * 
  * @param castling_in 
  */
-inline void BitBoard::setCastling(u8 castling_in) {
+void BitBoard::setCastling(u8 castling_in) {
     u8 diff = castling_in ^ castling;
     while (diff) {
         zoobrist ^= zoobrist_keys[64 * 13 + 9 + bitScanForward((u64)diff)];
@@ -324,7 +327,7 @@ inline void BitBoard::setCastling(u8 castling_in) {
  * @param index 
  * @param piece 
  */
-inline void BitBoard::addPiece(size_t index, u8 piece) {
+void BitBoard::addPiece(size_t index, u8 piece) {
     u8 removed = mailboard_var.pieces[index];
     mailboard_var.pieces[index] = piece; //Mail board updated
 
@@ -341,7 +344,7 @@ inline void BitBoard::addPiece(size_t index, u8 piece) {
  * 
  * @param index 
  */
-inline void BitBoard::removePiece(size_t index) {
+void BitBoard::removePiece(size_t index) {
     addPiece(index, 0);
 }
 
@@ -541,6 +544,7 @@ BitBoard::BitBoard(const std::string &fen_string) {
     }
     initZoobrist();
 }
+
 
 void BitBoard::initZoobrist()
 {
@@ -829,13 +833,13 @@ void BitBoard::unmake(Move move) {
 
 
 /**
- * @brief Returns the reachable positions for a bishop at position givven occupancy mask
+ * @brief Returns the reachable positions for a bishop at position given occupancy mask
  * 
  * @param position 
  * @param occupancy_mask 
  * @return u64 
  */
-inline u64 bishopMovesReachable(u8 position, u64 occupancy_mask) {
+u64 bishopMovesReachable(u8 position, u64 occupancy_mask) {
     u64 mask = bishop_masks[position];
     size_t index = pext(occupancy_mask, bishop_masks[position]);
     return bishop_magic[position][index];
@@ -843,13 +847,13 @@ inline u64 bishopMovesReachable(u8 position, u64 occupancy_mask) {
 
 
 /**
- * @brief Returns the reachable positions for a rook at position givven occupancy mask
+ * @brief Returns the reachable positions for a rook at position given occupancy mask
  * 
  * @param position
  * @param occupancy_mask 
  * @return u64 
  */
-inline u64 rookMovesReachable(u8 position, u64 occupancy_mask) {
+u64 rookMovesReachable(u8 position, u64 occupancy_mask) {
     return rook_magic[position][pext(occupancy_mask, rook_masks[position])];
 }
 
@@ -863,11 +867,11 @@ inline u64 rookMovesReachable(u8 position, u64 occupancy_mask) {
  * @param rook_like_pieces, rook and queen of the other player
  * @return u64 
  */
-inline u64 findLockedPieces(u8 king_index, u64 occupancy_mask, u64 bishop_like_pieces, u64 rook_like_pieces) {
+u64 findLockedPieces(u8 king_index, u64 occupancy_mask, u64 bishop_like_pieces, u64 rook_like_pieces) {
     u64 blocked = 0;
     u64 reachable_pieces = bishopMovesReachable(king_index, occupancy_mask) & occupancy_mask;
     //we have now established the pieces potentially blocked by a bishop_like_piece
-    //now we must find wheter there is such a piece
+    //now we must find wether there is such a piece
     while (bishop_like_pieces) {
         u8 bishop_index = bitScanForward(bishop_like_pieces);
         u64 takeable_opponent = bishopMovesReachable(bishop_index, occupancy_mask);
@@ -905,7 +909,7 @@ inline u64 findLockedPieces(u8 king_index, u64 occupancy_mask, u64 bishop_like_p
  * @param locked 
  * @return u64 
  */
-inline u64 rookLikeMoves(u8 rook_index, u8 king_index, u64 occupancy_mask, u64 valid_targets, u64 locked) {
+u64 rookLikeMoves(u8 rook_index, u8 king_index, u64 occupancy_mask, u64 valid_targets, u64 locked) {
     u64 reachable = rookMovesReachable(rook_index, occupancy_mask) & valid_targets; //can move anywhere except own piece
     if ((ONE << rook_index) & locked) {
         if (rook_index % 8 == king_index % 8) {
@@ -933,7 +937,7 @@ inline u64 rookLikeMoves(u8 rook_index, u8 king_index, u64 occupancy_mask, u64 v
  * @param locked 
  * @return u64 
  */
-inline u64 bishopLikeMoves(u8 bishop_index, u8 king_index, u64 occupancy_mask, u64 valid_targets, u64 locked) {
+u64 bishopLikeMoves(u8 bishop_index, u8 king_index, u64 occupancy_mask, u64 valid_targets, u64 locked) {
     u64 reachable = bishopMovesReachable(bishop_index, occupancy_mask) & valid_targets;
     if ((ONE << bishop_index) & locked) {
         if ((bishop_index % 8 == king_index % 8) || (bishop_index / 8 == king_index / 8)) {
@@ -954,7 +958,7 @@ inline u64 bishopLikeMoves(u8 bishop_index, u8 king_index, u64 occupancy_mask, u
  * @brief Generates legal moves for white
  * 
  * @param move_start_buffer moves will be inserted with start here and new moves will be written to following adresses
- * @return Move* returns adress after the last move inserted
+ * @return Move* returns address after the last move inserted
  */
 Move *BitBoard::moveGenWhite(Move *move_buffer) const{
     //We need to identify locked pieces

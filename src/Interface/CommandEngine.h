@@ -17,10 +17,7 @@
 #include <vector>
 
 #include "StringHelpers.h"
-#include "BoardConversions.h"
 #include "../Engine/EngineAB.h"
-#include "../Engine/Engine.h"
-#include "../Board/BitBoard.h"
 
 //Constants which represent required fields for the UCI standard
 const std::string ENGINE_NAME = "Magnificence2";

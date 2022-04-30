@@ -1,4 +1,5 @@
 #include "BoardConversions.h"
+#include <iostream>
 
 /// @brief This function converts a Bitboard class to a prettified string notation used for testing
 std::string BoardConversions::bbToDisplayString(BitBoard& board)

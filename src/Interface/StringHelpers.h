@@ -17,8 +17,6 @@
 #include <cctype>
 #include <ctype.h>
 
-#include "../Board/BitBoard.h"
-
 /**
  * @brief  A static helper class which is used for various common string tasks, such as string splitting.
  */

@@ -11,8 +11,9 @@
  */
 #include <iostream>
 
-#include "Board/BitBoard.h"
+#if defined(DEBUG)
 #include "Board/tests_bitboard.h"
+#endif
 #include "Interface/Interface.h"
 #include "settings.h"
 

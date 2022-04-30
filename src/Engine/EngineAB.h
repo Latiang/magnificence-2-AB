@@ -12,7 +12,6 @@
 #include <iostream>
 
 #include "Engine.h"
-#include "../Interface/BoardConversions.h"
 
 /**
  * @brief Alpha Beta Chess Engine class. Inherits from base class Engine.
