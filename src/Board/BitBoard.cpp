@@ -292,7 +292,6 @@ void init() {
             rook_magic[i][magic_val] = options;
         }
     }
-    
 }
 
 
@@ -647,7 +646,7 @@ void BitBoard::make(Move move) {
             break;
         case 7: //black pawn
             if (move.from() - move.to() != 8) {     //not normal moved pawn
-                if (move.from() - move.to() == 16) { //Double moved pawn
+                if (move.from() - move.to() == 16) {//Double moved pawn
                     new_ep = move.to() % 8;
                     removePiece(move.from());
                     addPiece(move.to(), 7);
